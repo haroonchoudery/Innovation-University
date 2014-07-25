@@ -6814,3 +6814,55 @@ h1.page-header {
 	text-align: center;
 	padding-top: 60px;
 }
+.stButton .stFb, .stButton .stTwbutton, .stButton .stMainServices{
+  height: 22px!important;
+}
+.group-when-where, .group-hosted-by, .group-event-detail{
+  width: 100%;
+  margin-bottom: 26px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.group-when-where h3, .group-hosted-by h3, .group-event-detail h3{
+  background-color: #fafafa;
+  border-color: #dedede;
+  color: #404040;
+  display: block;
+  width: auto;
+  font-weight: 500;
+  border-style: solid;
+  border-width: 1px 1px 0;
+  padding: 6px 11px 7px 14px;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0px;
+}
+.group-when-where .field-group-format-wrapper, .group-hosted-by .field-group-format-wrapper, .group-event-detail .field-group-format-wrapper{
+  background-color: #ffffff;
+  border-color: #dedede;
+  color: #666666;
+  padding: 13px 14px 13px 19px;
+  width: auto;
+  border-style: solid;
+  border-width: 1px;
+  word-wrap: break-word;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+body.node-type-event .field-name-title{
+  width: 80%;
+  float: left;
+}
+body.node-type-event .field-name-field-event-logo{
+  width: 20%;
+  float: left;
+}
+body.node-type-event .field-name-field-event-logo img{
+  width: 100%;
+}
+body.node-type-event h1.page-header{
+  display: none;
+}
