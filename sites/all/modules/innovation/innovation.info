@@ -1,0 +1,11 @@
+name = Innovation University Custom Module
+description = Customization for Innovation University website
+package = Innovation
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-02-01
+version = "7.x-1.x"
+core = "7.x"
+project = "Innovation"
+datestamp = "1359680350"
+

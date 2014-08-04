@@ -1,0 +1,219 @@
+h1.page-header {
+  text-align: center;
+  padding-top: 60px;
+}
+.stButton .stFb, .stButton .stTwbutton, .stButton .stMainServices{
+  height: 22px!important;
+}
+.group-when-where, .group-hosted-by, .group-event-detail{
+  width: 100%;
+  margin-bottom: 26px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+.group-when-where h3, .group-hosted-by h3, .group-event-detail h3{
+  background-color: #fafafa;
+  border-color: #dedede;
+  color: #404040;
+  display: block;
+  width: auto;
+  font-weight: 500;
+  border-style: solid;
+  border-width: 1px 1px 0;
+  padding: 6px 11px 7px 14px;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0px;
+}
+.group-when-where .field-group-format-wrapper, .group-hosted-by .field-group-format-wrapper, .group-event-detail .field-group-format-wrapper{
+  background-color: #ffffff;
+  border-color: #dedede;
+  color: #666666;
+  padding: 13px 14px 13px 19px;
+  width: auto;
+  border-style: solid;
+  border-width: 1px;
+  word-wrap: break-word;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+body.node-type-event .field-name-title{
+  width: 80%;
+  float: left;
+}
+body.node-type-event .field-name-field-event-logo{
+  width: 20%;
+  float: left;
+}
+body.node-type-event .field-name-field-event-logo img{
+  width: 100%;
+}
+body.node-type-event h1.page-header{
+  display: none;
+}
+body.node-type-event  .content .col-md-8{
+  width: 63%;
+  float: left;
+}
+body.node-type-event  .content .col-md-4{
+  width: 36%;
+  padding-left: 1%;
+  float: left;
+}
+body.node-type-event  .node-title{
+  display: none;
+}
+body.node-type-event .field-name-title{
+  float: left;
+}
+body.node-type-event .field-name-field-event-date-time{
+  float: left;
+  padding: 10px 0px;
+}
+body.node-type-event .sharethis-buttons{
+  float: left;
+  clear: both;
+  padding: 0px;
+}
+body.node-type-event .signup_field_signup_for_event a{
+  font-size: 16px;
+  background: #0d8ced;
+  padding: 5px 20px;
+  color: white;
+  border: 1px solid white;
+  display: inline-block;
+  position: absolute;
+}
+body.node-type-signup .field-type-user-reference{
+  display: none;
+}
+body.page-node-delete h1.node-title{
+  width: auto;
+}
+/*view-events*/
+.view-events{}
+.view-events ul{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.view-events ul li{
+  width: 32%;
+  padding-right:1%;
+  float:left;
+  list-style: none;
+  padding: 0px;
+  margin:10px 0px 0px 0px;
+}
+.view-events ul li .node-meta{
+  border: 0px;
+  margin: 0px;
+}
+.view-events ul li h2{
+  border: 0px;
+  font-size: 16px;
+  width: auto;
+  padding:0px;
+}
+.view-events ul li .node-box{
+  background: none;
+  border: 0px;
+}
+.view-events ul li .node-content{
+  background: none;
+  border: 0px;
+  padding: 5px;
+}
+.view-events ul li .location-locations-header{
+  display: none;
+}
+.view-events ul li .location-locations-wrapper{
+  display: none;
+}
+.view-events ul li .field-name-field-event-logo{
+  width: 220px;
+  height: 220px;
+}
+.view-events ul li .node-footer{
+  background: none;
+  border: 0px;
+  padding: 5px;
+}
+.view-events ul li .registration-slots-left{
+  padding: 5px 0px;
+}
+.view-events ul li .links a{
+  font-size: 16px;
+}
+.view-events ul li .signup_field_signup_for_event{
+  width: 50%;
+  text-align: right;  
+}
+.view-events ul li .signup_field_signup_for_event a{
+  font-size: 16px;
+  background: #0d8ced;
+  padding: 5px 5px;
+  color: white;
+  border: 1px solid white;
+  text-align: center;
+}
+.view-events ul li .signup_field_signup_for_event a:hover{
+  background: #fc7f0f;
+  color: #000000;
+}
+.view-events .node-teaser .comments-header{
+  display: none;
+}
+.view-events .node-teaser .submitted{
+  display: none;
+}
+.view-events{}
+.view-events{}
+.view-events{}
+.view-events{}
+.view-events{}
+.sharethis-buttons{
+  float: left;
+  padding: 5px;
+}
+.st_fblike_button{
+  vertical-align: middle;
+}
+.st_fblike_button span{
+  vertical-align: top!important;
+}
+form{
+  font-size:15px; 
+  font-weight:300; 
+  font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
+}
+form label{
+  font-size:15px; 
+  font-weight:300; 
+  font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
+}
+form input{
+  padding:4px;
+  font-size:15px; 
+  font-weight:300; 
+  font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
+}
+form .form-submit{
+  font-size:15px; 
+  font-weight:300; 
+  font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  background: #0d8ced;
+  padding: 5px 10px;
+  color: white;
+  border: 1px solid white;
+}
+.breadcrumb{
+  display: none;
+}
+body.page-node .tabs{
+  display: none;
+}

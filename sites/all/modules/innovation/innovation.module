@@ -1,0 +1,129 @@
+<?php
+/**
+ * @file
+ * Customization for Yannan website
+ */
+/**
+ * Implementation of hook_form_alter()
+ */
+function innovation_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  switch ($form_id) {
+    case 'signup_node_form':
+      $destination = drupal_get_destination();
+      $event_id = arg(3);
+      if($event_id > 0) {
+        $node_event = node_load($event_id);
+        if(is_object($node_event)) {
+          if (in_array('anonymous user', $user->roles)) {
+            unset($_GET['destination']);
+            drupal_static_reset('drupal_get_destination');
+            drupal_get_destination();
+            drupal_set_message(t("You have to log into website to join the event"));
+            drupal_goto("user/login",array("destination"=>"node/".$node_event->nid));
+            break;
+          }
+          else{
+            //get the node
+            $query = new EntityFieldQuery();
+            $query->entityCondition('entity_type', 'node')
+              ->entityCondition('bundle', 'signup')
+              ->fieldCondition('field_signup_for_event', 'nid', $node_event->nid, '=')
+              ->fieldCondition('field_registrant', 'uid', $user->uid, '=')
+              ->range(0, 10)
+              ->addMetaData('account', user_load($user->uid));
+            $result = $query->execute();
+            $num_node = isset($result['node'])?count($result['node']):0;
+            $start = $node_event->field_event_date_time['und'][0]['value'];
+            $end = $node_event->field_event_date_time['und'][0]['value2'];
+            if($num_node == 0 ) {
+              $today = date("Y-m-d");
+              if(isset($end) && $end != ""){
+                if($today > $end) {
+                  drupal_set_message(t("This event is finished already!"), 'status', FALSE);
+                  drupal_goto("/");
+                  break;
+                }
+              }
+              $node = new stdClass();
+              $node->title = $user->name;
+              $node->type = "signup";
+              node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+              $node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+              $node->uid = $user->uid;
+              $node->status = 1; //(1 or 0): published or not
+              $node->promote = 0; //(1 or 0): promoted to front page
+              $node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+              $node->field_registrant = array(
+                'und' => array(
+                  '0' => array(
+                    'uid' => $user->uid,
+                  ),
+                ),
+              );
+              $node->field_signup_for_event = array(
+                'und' => array(
+                  '0' => array(
+                    'nid' => $node_event->nid,
+                  ),
+                ),
+              );
+              $node = node_submit($node); // Prepare node for saving
+              node_save($node);
+              $module = 'innovation';
+              $key = 'innovation_key';
+              $language = language_default();
+              $content = "You joined the ".$node_event->title."\n";
+              $content .= "At ".$start."\n";
+              $content .= "Cost of attendance FREE\n";
+              $params = array(
+                '@url' => url('node/' . $node->nid, array('absolute' => TRUE)),
+                '@title' => $node_event->title,
+                '@content' => $content,
+              );
+              $result = drupal_mail($module, $key, $user->mail, $language, $params);
+              drupal_set_message(t("You joined this event successfully"), 'status', FALSE);
+              drupal_goto("/");
+            }
+            else{
+              drupal_set_message(t("You participanted this event already"), 'status', FALSE);
+              drupal_goto("/");
+            }
+          }
+        }
+        else{
+          drupal_goto("/");
+        }
+      }
+    break;
+  }
+  return $form;
+}
+/**
+ *  Custom validation function.
+ */ 
+function innovation_custom_data_validate(&$form, &$form_state) {
+
+  $values = $form_state['values'];  //all submitted values will be in this array, keyed by the name, grab any value you want.
+}
+/**
+* implementation of hook_node_view();
+*/ 
+function innovation_node_view($node, $view_mode) {
+  global $base_url;
+  if ($node->type=="event"){
+    if($view_mode == 'full'){}
+  }
+  return $node;
+}
+/**
+ * Implements hook_mail().
+ */
+function innovation_mail($key, &$message, $params) {
+  $message['subject'] = t("@title event registration information", $params);
+  $message['body'] = array();
+  $message['body'][] = t("Hello", $params);
+  $message['body'][] = t("@content", $params);
+  $message['body'][] = t("Reference the event link at @title (@url).", $params);
+  
+}
