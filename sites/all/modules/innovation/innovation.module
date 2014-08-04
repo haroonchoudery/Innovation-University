@@ -6,6 +6,7 @@
 /**
  * Implementation of hook_form_alter()
  */
+
 function innovation_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   switch ($form_id) {
