@@ -201,6 +201,14 @@ form input{
   font-weight:300; 
   font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
 }
+form select{
+  font-weight: 300;
+  font-family: "Open Sans",Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: black;
+  border: 1px solid #0d8ced;
+}
 form .form-submit{
   font-size:15px; 
   font-weight:300; 
