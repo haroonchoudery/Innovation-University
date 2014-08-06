@@ -88,12 +88,12 @@ function innovation_form_alter(&$form, &$form_state, $form_id) {
                 '@content' => $content,
               );
               $result = drupal_mail($module, $key, $user->mail, $language, $params);
-              drupal_goto("/");
               drupal_set_message(t("You joined this event successfully"), 'status', FALSE);
+              drupal_goto("/");
             }
             else{
+              drupal_set_message(t("You joined this event successfully"), 'status', FALSE);
               drupal_goto("/");
-              drupal_set_message(t("You participanted this event already"), 'status', FALSE);
             }
           }
         }
