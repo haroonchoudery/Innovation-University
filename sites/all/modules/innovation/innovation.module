@@ -16,6 +16,10 @@ function innovation_form_alter(&$form, &$form_state, $form_id) {
       if($event_id > 0) {
         $node_event = node_load($event_id);
         if(is_object($node_event)) {
+          if(innovation_get_available_slots($event_id) <= 0){
+            drupal_set_message(t("Oops! The event that you are attempting to register for is already full. Please try again later if there are remaining available slots."), 'status', FALSE);
+            drupal_goto("/");
+          }
           if (in_array('anonymous user', $user->roles)) {
             unset($_GET['destination']);
             drupal_static_reset('drupal_get_destination');
@@ -37,6 +41,7 @@ function innovation_form_alter(&$form, &$form_state, $form_id) {
             $num_node = isset($result['node'])?count($result['node']):0;
             $start = $node_event->field_event_date_time['und'][0]['value'];
             $end = $node_event->field_event_date_time['und'][0]['value2'];
+            $cost = $node_event->field_cost_of_attendence['und'][0]['value'];
             if($num_node == 0 ) {
               $today = date("Y-m-d");
               if(isset($end) && $end != ""){
@@ -76,7 +81,7 @@ function innovation_form_alter(&$form, &$form_state, $form_id) {
               $language = language_default();
               $content = "You joined the ".$node_event->title."\n";
               $content .= "At ".$start."\n";
-              $content .= "Cost of attendance FREE\n";
+              $content .= "Cost of attendance : ".$cost."$\n";
               $params = array(
                 '@url' => url('node/' . $node->nid, array('absolute' => TRUE)),
                 '@title' => $node_event->title,
@@ -113,7 +118,8 @@ function innovation_custom_data_validate(&$form, &$form_state) {
 function innovation_node_view($node, $view_mode) {
   global $base_url;
   if ($node->type=="event"){
-    if($view_mode == 'full'){}
+    if($view_mode == 'full'){
+    }
   }
   return $node;
 }
@@ -127,4 +133,38 @@ function innovation_mail($key, &$message, $params) {
   $message['body'][] = t("@content", $params);
   $message['body'][] = t("Reference the event link at @title (@url).", $params);
   
+}
+/*Get Capacity for the event*/
+function innovation_get_capacity($event_id){
+  $total = 0;
+  if($event_id > 0) {
+    $node_event = node_load($event_id);
+    if(is_object($node_event)){
+      $total = (int)$node_event->field_event_capacity['und'][0]['value'];
+      //get total registrant
+      $query = new EntityFieldQuery();
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'signup')
+        ->fieldCondition('field_signup_for_event', 'nid', $node_event->nid, '=');
+    }
+  }
+  return $total;
+}
+function innovation_get_available_slots($event_id){
+  $left = 0;
+  if($event_id > 0) {
+    $node_event = node_load($event_id);
+    if(is_object($node_event)){
+      $total = (int)$node_event->field_event_capacity['und'][0]['value'];
+      //get total registrant
+      $query = new EntityFieldQuery();
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'signup')
+        ->fieldCondition('field_signup_for_event', 'nid', $node_event->nid, '=');
+      $result = $query->execute();
+      $num_node = isset($result['node'])?count($result['node']):0;
+      $left =  $total - $num_node;
+    }
+  }
+  return $left;
 }
