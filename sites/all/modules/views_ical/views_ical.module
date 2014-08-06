@@ -1,6 +1,6 @@
 <?php
 
-
+variable_set('date_format_ical', 'Ymd\THi\0\0\TZID');
 /**
  * Implements hook_date_format_types().
  */
