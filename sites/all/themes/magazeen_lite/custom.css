@@ -71,7 +71,15 @@ body.node-type-event .field-name-title{
 }
 body.node-type-event .field-name-field-event-date-time{
   float: left;
-  padding: 10px 0px;
+  padding: 10px 0px 5px 0px;
+}
+body.node-type-event .field-name-field-event-capacity{
+  float: left;
+  padding: 5px 0px;
+}
+body.node-type-event .field-name-available-slots{
+  float: left;
+  padding: 5px 0px;
 }
 body.node-type-event .sharethis-buttons{
   float: left;
